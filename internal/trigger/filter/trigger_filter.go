@@ -19,9 +19,8 @@ import (
 
 	ce "github.com/cloudevents/sdk-go/v2"
 
-	"github.com/vanus-labs/vanus/observability/log"
-
 	"github.com/vanus-labs/vanus/internal/primitive"
+	"github.com/vanus-labs/vanus/observability/log"
 )
 
 func extractFilter(subscriptionFilter *primitive.SubscriptionFilter) Filter {
@@ -33,6 +32,9 @@ func extractFilter(subscriptionFilter *primitive.SubscriptionFilter) Filter {
 	}
 	if len(subscriptionFilter.Suffix) > 0 {
 		return NewSuffixFilter(subscriptionFilter.Suffix)
+	}
+	if len(subscriptionFilter.Contains) > 0 {
+		return NewContainsFilter(subscriptionFilter.Contains)
 	}
 	if subscriptionFilter.Not != nil {
 		return NewNotFilter(extractFilter(subscriptionFilter.Not))

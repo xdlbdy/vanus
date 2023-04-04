@@ -96,14 +96,15 @@ func (c *SubscriptionConfig) String() string {
 }
 
 type SubscriptionFilter struct {
-	Exact  map[string]string      `json:"exact,omitempty"`
-	Prefix map[string]string      `json:"prefix,omitempty"`
-	Suffix map[string]string      `json:"suffix,omitempty"`
-	CeSQL  string                 `json:"ce_sql,omitempty"`
-	Not    *SubscriptionFilter    `json:"not,omitempty"`
-	All    SubscriptionFilterList `json:"all,omitempty"`
-	Any    SubscriptionFilterList `json:"any,omitempty"`
-	CEL    string                 `json:"cel,omitempty"`
+	Exact    map[string]string      `json:"exact,omitempty"`
+	Prefix   map[string]string      `json:"prefix,omitempty"`
+	Suffix   map[string]string      `json:"suffix,omitempty"`
+	Contains map[string]string      `json:"contains,omitempty"`
+	CeSQL    string                 `json:"ce_sql,omitempty"`
+	Not      *SubscriptionFilter    `json:"not,omitempty"`
+	All      SubscriptionFilterList `json:"all,omitempty"`
+	Any      SubscriptionFilterList `json:"any,omitempty"`
+	CEL      string                 `json:"cel,omitempty"`
 }
 
 type SubscriptionFilterList []*SubscriptionFilter

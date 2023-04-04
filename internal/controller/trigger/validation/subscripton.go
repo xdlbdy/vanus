@@ -225,6 +225,9 @@ func ValidateFilter(ctx context.Context, f *metapb.Filter) error {
 	if err := validateAttributeMap("suffix", f.Suffix); err != nil {
 		return err
 	}
+	if err := validateAttributeMap("contains", f.Contains); err != nil {
+		return err
+	}
 	if f.Sql != "" {
 		if err := validateCeSQL(ctx, f.Sql); err != nil {
 			return err
@@ -302,6 +305,12 @@ func hasMultipleDialects(f *metapb.Filter) bool {
 		dialectFound = true
 	}
 	if len(f.Suffix) > 0 {
+		if dialectFound {
+			return true
+		}
+		dialectFound = true
+	}
+	if len(f.Contains) > 0 {
 		if dialectFound {
 			return true
 		}

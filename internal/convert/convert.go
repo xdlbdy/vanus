@@ -336,6 +336,9 @@ func fromPbFilter(filter *pb.Filter) *primitive.SubscriptionFilter {
 	if len(filter.Prefix) != 0 {
 		return &primitive.SubscriptionFilter{Prefix: filter.Prefix}
 	}
+	if len(filter.Contains) != 0 {
+		return &primitive.SubscriptionFilter{Contains: filter.Contains}
+	}
 	if filter.Not != nil {
 		return &primitive.SubscriptionFilter{Not: fromPbFilter(filter.Not)}
 	}
@@ -371,6 +374,9 @@ func toPbFilter(filter *primitive.SubscriptionFilter) *pb.Filter {
 	}
 	if len(filter.Prefix) != 0 {
 		return &pb.Filter{Prefix: filter.Prefix}
+	}
+	if len(filter.Contains) > 0 {
+		return &pb.Filter{Contains: filter.Contains}
 	}
 	if filter.Not != nil {
 		return &pb.Filter{Not: toPbFilter(filter.Not)}

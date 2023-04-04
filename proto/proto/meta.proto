@@ -192,6 +192,7 @@ message Filter {
   repeated Filter any = 6;
   string sql = 7;
   string cel = 8;
+  map<string,string> contains = 9;
 }
 
 message SubscriptionInfo {
